@@ -3,7 +3,7 @@
 
 #include <Rcpp.h>
 // using namespace Rcpp;
-
+// [[Rcpp::depends(RcppGSL)]]
 extern "C" {
 namespace vol2bird
 {

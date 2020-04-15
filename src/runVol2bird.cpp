@@ -4,6 +4,7 @@
 #include <Rcpp.h>
 // using namespace Rcpp;
 
+// [[Rcpp::depends(RcppGSL)]]
 extern "C" {
   namespace vol2bird
   {
@@ -84,13 +85,124 @@ Rcpp::CharacterVector runVol2bird(const Rcpp::CharacterVector& inn, const Rcpp::
     }
     
     // read configuration options
-    int configSuccessful = vol2birdLoadConfig(&alldata) == 0;
+    // int configSuccessful = vol2birdLoadConfig(&alldata) == 0;
+    // 
+    // if (configSuccessful == FALSE) {
+    //   Rcpp::stop("Error: failed to load configuration\n");
+    //   // return -1;
+    // }
+
     
-    if (configSuccessful == FALSE) {
-      Rcpp::stop("Error: failed to load configuration\n");
-      // return -1;
-    }
+    ///////////////////////
+    //
+    // CONFIG
+    //
+    //////////////
+    (&alldata)->options.azimMax = 360;//cfg_getfloat(*cfg, "AZIMMAX");
+    (&alldata)->options.azimMin = 0;//cfg_getfloat(*cfg, "AZIMMIN");
     
+    // alldata->options.azimMax = cfg_getfloat(*cfg, "AZIMMAX");
+    // alldata->options.azimMin = cfg_getfloat(*cfg, "AZIMMIN");
+    // alldata->options.layerThickness = cfg_getfloat(*cfg, "HLAYER");
+    // alldata->options.nLayers = cfg_getint(*cfg, "NLAYER");
+    // alldata->options.rangeMax = cfg_getfloat(*cfg, "RANGEMAX");
+    // alldata->options.rangeMin = cfg_getfloat(*cfg, "RANGEMIN");
+    // alldata->options.elevMax = cfg_getfloat(*cfg, "ELEVMAX");
+    // alldata->options.elevMin = cfg_getfloat(*cfg, "ELEVMIN");
+    // alldata->options.radarWavelength = cfg_getfloat(*cfg, "RADAR_WAVELENGTH_CM");
+    // alldata->options.useClutterMap = cfg_getbool(*cfg,"USE_CLUTTERMAP");
+    // alldata->options.clutterValueMin = cfg_getfloat(*cfg, "CLUTTERVALUEMIN");
+    // strcpy(alldata->options.clutterMap,cfg_getstr(*cfg,"CLUTTERMAP"));
+    // alldata->options.printDbz = cfg_getbool(*cfg,"PRINT_DBZ");
+    // alldata->options.printDealias = cfg_getbool(*cfg,"PRINT_DEALIAS");
+    // alldata->options.printVrad = cfg_getbool(*cfg,"PRINT_VRAD");
+    // alldata->options.printRhohv = cfg_getbool(*cfg,"PRINT_RHOHV");
+    // alldata->options.printTex = cfg_getbool(*cfg,"PRINT_TEXTURE");
+    // alldata->options.printCell = cfg_getbool(*cfg,"PRINT_CELL");
+    // alldata->options.printCellProp = cfg_getbool(*cfg,"PRINT_CELL_PROP");
+    // alldata->options.printClut = cfg_getbool(*cfg,"PRINT_CLUT");
+    // alldata->options.printOptions = cfg_getbool(*cfg,"PRINT_OPTIONS");
+    // alldata->options.printProfileVar = cfg_getbool(*cfg,"PRINT_PROFILE");
+    // alldata->options.printPointsArray = cfg_getbool(*cfg,"PRINT_POINTS_ARRAY");
+    // alldata->options.fitVrad = cfg_getbool(*cfg,"FIT_VRAD");
+    // alldata->options.exportBirdProfileAsJSONVar = cfg_getbool(*cfg,"EXPORT_BIRD_PROFILE_AS_JSON"); 
+    // alldata->options.minNyquist = cfg_getfloat(*cfg,"MIN_NYQUIST_VELOCITY");
+    // alldata->options.maxNyquistDealias = cfg_getfloat(*cfg,"MAX_NYQUIST_DEALIAS");
+    // alldata->options.birdRadarCrossSection = cfg_getfloat(*cfg,"SIGMA_BIRD");
+    // alldata->options.cellStdDevMax = cfg_getfloat(*cfg,"STDEV_CELL");
+    // alldata->options.stdDevMinBird = cfg_getfloat(*cfg,"STDEV_BIRD");
+    // alldata->options.etaMax = cfg_getfloat(*cfg,"ETAMAX");
+    // alldata->options.cellEtaMin = cfg_getfloat(*cfg,"ETACELL");
+    // strcpy(alldata->options.dbzType,cfg_getstr(*cfg,"DBZTYPE"));
+    // alldata->options.requireVrad = cfg_getbool(*cfg,"REQUIRE_VRAD");
+    // alldata->options.dealiasVrad = cfg_getbool(*cfg,"DEALIAS_VRAD");
+    // alldata->options.dealiasRecycle = cfg_getbool(*cfg,"DEALIAS_RECYCLE");
+    // alldata->options.dualPol = cfg_getbool(*cfg,"DUALPOL");
+    // alldata->options.singlePol = cfg_getbool(*cfg,"SINGLEPOL");
+    // alldata->options.dbzThresMin = cfg_getfloat(*cfg,"DBZMIN");
+    // alldata->options.rhohvThresMin = cfg_getfloat(*cfg,"RHOHVMIN");
+    // alldata->options.resample = cfg_getbool(*cfg,"RESAMPLE");
+    // alldata->options.resampleRscale = cfg_getfloat(*cfg,"RESAMPLE_RSCALE");
+    // alldata->options.resampleNbins = cfg_getint(*cfg,"RESAMPLE_NBINS");
+    // alldata->options.resampleNrays = cfg_getint(*cfg,"RESAMPLE_NRAYS");
+    // alldata->options.mistNetNElevs = cfg_size(*cfg, "MISTNET_ELEVS");
+    // for(int i=0; i<alldata->options.mistNetNElevs; i++){
+    //   alldata->options.mistNetElevs[i] = cfg_getnfloat(*cfg, "MISTNET_ELEVS",i);
+    // }
+    // alldata->options.mistNetElevsOnly = cfg_getbool(*cfg, "MISTNET_ELEVS_ONLY");
+    // alldata->options.useMistNet = cfg_getbool(*cfg, "USE_MISTNET");
+    // strcpy(alldata->options.mistNetPath,cfg_getstr(*cfg,"MISTNET_PATH"));
+    // 
+    // 
+    // // ------------------------------------------------------------- //
+    // //              vol2bird options from constants.h                //
+    // // ------------------------------------------------------------- //
+    // 
+    // alldata->constants.areaCellMin = AREACELL;
+    // alldata->constants.cellClutterFractionMax = CLUTPERCCELL;
+    // alldata->constants.chisqMin = CHISQMIN;
+    // alldata->constants.fringeDist = FRINGEDIST;
+    // alldata->constants.nBinsGap = NBINSGAP;
+    // alldata->constants.nPointsIncludedMin = NDBZMIN;
+    // alldata->constants.nNeighborsMin = NEIGHBORS;
+    // alldata->constants.nObsGapMin = NOBSGAPMIN;
+    // alldata->constants.nAzimNeighborhood = NTEXBINAZIM;
+    // alldata->constants.nRangNeighborhood = NTEXBINRANG;
+    // alldata->constants.nCountMin = NTEXMIN; 
+    // alldata->constants.refracIndex = REFRACTIVE_INDEX_OF_WATER;
+    // alldata->constants.absVDifMax = VDIFMAX;
+    // alldata->constants.vradMin = VRADMIN;
+    // 
+    // // ------------------------------------------------------------- //
+    // //       some other variables, derived from user options         //
+    // // ------------------------------------------------------------- //
+    // 
+    // alldata->misc.rCellMax = alldata->options.rangeMax + RCELLMAX_OFFSET;
+    // alldata->misc.nDims = 2;
+    // alldata->misc.nParsFitted = 3;
+    // 
+    // // the following settings depend on wavelength, will be set in Vol2birdSetup
+    // alldata->misc.dbzFactor = NAN;
+    // alldata->misc.dbzMax = NAN;
+    // alldata->misc.cellDbzMin = NAN;
+    // 
+    // alldata->misc.loadConfigSuccessful = TRUE;    
+    
+    
+    ///////////////////////
+    //
+    // END CONFIG
+    //
+    //////////////
+    
+    
+    
+    
+    
+    
+    
+    
+        
     // read in data up to a distance of alldata.misc.rCellMax
     // we do not read in the full volume for speed/memory
     vol2bird::PolarVolume_t* volume = NULL;
