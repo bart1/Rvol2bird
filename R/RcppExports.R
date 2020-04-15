@@ -15,17 +15,18 @@ vol2birdVersion <- function() {
 #'
 #' @param inn the input polar volume file as a string
 #' @param the output h5 file for the vp
+#' @param vol2BirdConfig a list with config options
 #' 
 #' @return A character with the vol to bird version
 #' 
 #' @export
 #' 
 #' @examples
-#' runVol2bird(system.file("extdata", "volume.h5", package = "bioRad"), t<-tempfile() )
+#' runVol2bird(system.file("extdata", "volume.h5", package = "bioRad"), t<-tempfile(), vol2BirdConfig )
 #' vp<-bioRad::read_vpfiles(t)
 #' plot(vp)
 #' 
-runVol2bird <- function(inn, out) {
-    .Call('_Rvol2bird_runVol2bird', PACKAGE = 'Rvol2bird', inn, out)
+runVol2bird <- function(inn, out, options) {
+    .Call('_Rvol2bird_runVol2bird', PACKAGE = 'Rvol2bird', inn, out, options)
 }
 

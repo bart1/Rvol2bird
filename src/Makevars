@@ -8,9 +8,12 @@ OBJECTS_C = $(SOURCES_C:.c=.o)
 
 OBJECTS = $(SOURCES:.cpp=.o) $(OBJECTS_C)
 
-PKG_CPPFLAGS+= -Wall -pedantic -pthread -fPIC -O2 -g -I../inst -I../inst/libvol2bird -I../inst/librave -I../inst/libhlhdf
-PKG_CFLAGS+= -Wall -pedantic -pthread -fPIC -O2 -g -I../inst -I../inst/libvol2bird -I../inst/librave  -I../inst/libhlhdf  -I../inst/libtnc
+PKG_CPPFLAGS+= -Wall -pedantic -pthread -fPIC -O2 -g -I../inst -I../inst/libvol2bird -I../inst/librave -I../inst/libhlhdf -DNOCONFUSE
+PKG_CFLAGS+= -Wall -pedantic -pthread -fPIC -O2 -g -I../inst -I../inst/libvol2bird -I../inst/librave  -I../inst/libhlhdf  -I../inst/libtnc -DNOCONFUSE
+
 PKG_CFLAGS+= `$(R_HOME)/bin/Rscript -e "RcppGSL:::CFlags()"`
+PKG_CPPFLAGS+= `$(R_HOME)/bin/Rscript -e "RcppGSL:::CFlags()"`
+
 #-I/usr/include/hdf5/serial -I/usr/lib/x86_64-linux-gnu/hdf5/serial
 
 # rave_bufr_io rave_simplexml omitted
@@ -27,7 +30,7 @@ PKG_LIBS += -L/opt/local/lib/proj49/lib
 # uncomment below to print the contents of $(PKG_LIBS)
 $(info $$PKG_LIBS is [${PKG_LIBS}])
 
-PKG_LIBS += -lconfuse -lproj
+PKG_LIBS +=  -lproj
 
 all: $(SHLIB)
 
