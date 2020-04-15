@@ -5,9 +5,10 @@
 #'
 #' @return A character with the vol to bird version
 #' 
+#' @export
 #' 
 vol2birdVersion <- function() {
-    .Call(`_Rvol2bird_vol2birdVersion`)
+    .Call('_Rvol2bird_vol2birdVersion', PACKAGE = 'Rvol2bird')
 }
 
 #' convert pvol file
@@ -17,6 +18,7 @@ vol2birdVersion <- function() {
 #' 
 #' @return A character with the vol to bird version
 #' 
+#' @export
 #' 
 #' @examples
 #' runVol2bird(system.file("extdata", "volume.h5", package = "bioRad"), t<-tempfile() )
@@ -24,6 +26,6 @@ vol2birdVersion <- function() {
 #' plot(vp)
 #' 
 runVol2bird <- function(inn, out) {
-    .Call(`_Rvol2bird_runVol2bird`, inn, out)
+    .Call('_Rvol2bird_runVol2bird', PACKAGE = 'Rvol2bird', inn, out)
 }
 

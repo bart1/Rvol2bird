@@ -17,6 +17,7 @@ namespace vol2bird
 //'
 //' @return A character with the vol to bird version
 //' 
+//' @export
 //' 
 // [[Rcpp::export]]
 Rcpp::CharacterVector vol2birdVersion() {

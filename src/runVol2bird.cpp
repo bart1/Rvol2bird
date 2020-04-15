@@ -20,6 +20,7 @@ extern "C" {
 //' 
 //' @return A character with the vol to bird version
 //' 
+//' @export
 //' 
 //' @examples
 //' runVol2bird(system.file("extdata", "volume.h5", package = "bioRad"), t<-tempfile() )
