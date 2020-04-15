@@ -19,7 +19,7 @@ PKG_CPPFLAGS+= `$(R_HOME)/bin/Rscript -e "RcppGSL:::CFlags()"`
 # rave_bufr_io rave_simplexml omitted
 PKG_LIBS = `$(R_HOME)/bin/Rscript -e "RcppGSL:::LdFlags()"`
 
-RHDF5_LIBS = $(shell "$(R_HOME)/bin/Rscript" --vanilla --slave -e 'Rhdf5lib::pkgconfig("PKG_CXX_LIBS")')
+RHDF5_LIBS = $(shell "$(R_HOME)/bin/Rscript" --vanilla --slave -e 'Rhdf5lib::pkgconfig()')
 PKG_LIBS += $(RHDF5_LIBS)
 
 # system specfic settings for Adriaan's Mac:
