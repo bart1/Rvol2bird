@@ -5101,7 +5101,8 @@ void vol2birdTearDown(vol2bird_t* alldata) {
     RAVE_OBJECT_RELEASE(alldata->vp);
  
     // free the memory that holds the user configurable options
-    cfg_free(alldata->cfg);
+    //XXX
+  //  cfg_free(alldata->cfg);
     
     // reset this variable to its initial value
     alldata->misc.initializationSuccessful = FALSE;

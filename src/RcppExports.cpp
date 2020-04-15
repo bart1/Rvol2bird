@@ -17,21 +17,22 @@ BEGIN_RCPP
 END_RCPP
 }
 // runVol2bird
-Rcpp::CharacterVector runVol2bird(const Rcpp::CharacterVector& inn, const Rcpp::CharacterVector& out);
-RcppExport SEXP _Rvol2bird_runVol2bird(SEXP innSEXP, SEXP outSEXP) {
+Rcpp::CharacterVector runVol2bird(const Rcpp::CharacterVector& inn, const Rcpp::CharacterVector& out, const Rcpp::List& options);
+RcppExport SEXP _Rvol2bird_runVol2bird(SEXP innSEXP, SEXP outSEXP, SEXP optionsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const Rcpp::CharacterVector& >::type inn(innSEXP);
     Rcpp::traits::input_parameter< const Rcpp::CharacterVector& >::type out(outSEXP);
-    rcpp_result_gen = Rcpp::wrap(runVol2bird(inn, out));
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type options(optionsSEXP);
+    rcpp_result_gen = Rcpp::wrap(runVol2bird(inn, out, options));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
     {"_Rvol2bird_vol2birdVersion", (DL_FUNC) &_Rvol2bird_vol2birdVersion, 0},
-    {"_Rvol2bird_runVol2bird", (DL_FUNC) &_Rvol2bird_runVol2bird, 2},
+    {"_Rvol2bird_runVol2bird", (DL_FUNC) &_Rvol2bird_runVol2bird, 3},
     {NULL, NULL, 0}
 };
 

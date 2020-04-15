@@ -4,7 +4,7 @@
 \alias{runVol2bird}
 \title{convert pvol file}
 \usage{
-runVol2bird(inn, out)
+runVol2bird(inn, out, options)
 }
 \arguments{
 \item{inn}{the input polar volume file as a string}
@@ -18,7 +18,7 @@ A character with the vol to bird version
 convert pvol file
 }
 \examples{
-runVol2bird(system.file("extdata", "volume.h5", package = "bioRad"), t<-tempfile() )
+runVol2bird(system.file("extdata", "volume.h5", package = "bioRad"), t<-tempfile(), vol2BirdConfig )
 vp<-bioRad::read_vpfiles(t)
 plot(vp)
 
