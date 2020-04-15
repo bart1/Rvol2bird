@@ -5,36 +5,36 @@
 
 using namespace Rcpp;
 
-// volv
-Rcpp::CharacterVector volv();
-RcppExport SEXP _vol2birdR2_volv() {
+// vol2birdVersion
+Rcpp::CharacterVector vol2birdVersion();
+RcppExport SEXP _Rvol2bird_vol2birdVersion() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(volv());
+    rcpp_result_gen = Rcpp::wrap(vol2birdVersion());
     return rcpp_result_gen;
 END_RCPP
 }
-// volv2
-Rcpp::CharacterVector volv2(const Rcpp::CharacterVector& inn, const Rcpp::CharacterVector& out);
-RcppExport SEXP _vol2birdR2_volv2(SEXP innSEXP, SEXP outSEXP) {
+// runVol2bird
+Rcpp::CharacterVector runVol2bird(const Rcpp::CharacterVector& inn, const Rcpp::CharacterVector& out);
+RcppExport SEXP _Rvol2bird_runVol2bird(SEXP innSEXP, SEXP outSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const Rcpp::CharacterVector& >::type inn(innSEXP);
     Rcpp::traits::input_parameter< const Rcpp::CharacterVector& >::type out(outSEXP);
-    rcpp_result_gen = Rcpp::wrap(volv2(inn, out));
+    rcpp_result_gen = Rcpp::wrap(runVol2bird(inn, out));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_vol2birdR2_volv", (DL_FUNC) &_vol2birdR2_volv, 0},
-    {"_vol2birdR2_volv2", (DL_FUNC) &_vol2birdR2_volv2, 2},
+    {"_Rvol2bird_vol2birdVersion", (DL_FUNC) &_Rvol2bird_vol2birdVersion, 0},
+    {"_Rvol2bird_runVol2bird", (DL_FUNC) &_Rvol2bird_runVol2bird, 2},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_vol2birdR2(DllInfo *dll) {
+RcppExport void R_init_Rvol2bird(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

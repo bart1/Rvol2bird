@@ -1,2 +1,4 @@
 *.o
 Rvol2bird.so
+*.so
+*.dll
