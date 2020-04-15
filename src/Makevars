@@ -1,37 +1,16 @@
-#PKG_CPPFLAGS += -I/home/bart/vol2bird/opt/rave/include/ -I/home/bart/vol2bird/lib/  -I/home/bart/vol2bird/opt/hlhdf/include/ -I/usr/include/hdf5/serial/
-#PKG_LIBS += -lhdf5-serial
-#PKG_CPPFLAGS += -I./rave/# -I/home/bart/vol2bird/opt/rave/include/ 
-#PKG_LIBS +=  -L/home/bart/vol2bird/opt/rave/lib -L/home/bart/vol2bird/opt/vol2bird/lib  -lvol2bird  -Wl,-rpath=/home/bart/vol2bird/opt/vol2bird/lib
-#PKG_LIBS += -L./libvol2bird -lvol2bird
-#all: libvol2bird/libvol2bird.so vol2birdR2.so
 
-#OBJECTS= avol.o  RcppExports.o
-
-#libvol2bird/libvol2bird.a:
-#	make -C libvol2bird RSL_INCLUDE_FLAG="-I../rave" LDFLAGS="-Wall" libvol2bird.a
-
-#libvol2bird/libvol2bird.so:
-#	make -C libvol2bird RSL_INCLUDE_FLAG="-I../rave" LDFLAGS="-Wall -shared" libvol2bird.so
-
-#libvol2bird.so: libvol2bird/libvol2bird.so:
-#	mv libvol2bird/libvol2bird.so libvol2bird.so
-
-
-
-
-ROOT_DIR := $(abspath .)                                                        
-$(info The compilation root directory is: $(ROOT_DIR))                          
+                       
 $(info The name of the shared library to be created is: $(SHLIB))               
 
 SOURCES = $(wildcard ./*.cpp )
 
-SOURCES_SUNDIALS_ALL = $(wildcard ./libvol2bird/*.c ./librave/*.c ./libhlhdf/*.c ./libtnc/*.c)
+SOURCES_C = $(wildcard ./libvol2bird/*.c ./librave/*.c ./libhlhdf/*.c ./libtnc/*.c)
 
-OBJECTS_SUNDIALS_ALL = $(SOURCES_SUNDIALS_ALL:.c=.o)
+OBJECTS_C = $(SOURCES_C:.c=.o)
 
 
 
-OBJECTS = $(SOURCES:.cpp=.o) $(OBJECTS_SUNDIALS_ALL)
+OBJECTS = $(SOURCES:.cpp=.o) $(OBJECTS_C)
  
 PKG_CPPFLAGS+= -std=c++11 -Wall -pedantic -pthread -fPIC -O2 -g -fPIC -I../inst -I../inst/libvol2bird -I../inst/librave -I../inst/libhlhdf 
 PKG_CFLAGS+= -Wall -pedantic -pthread -fPIC -O2 -g -fPIC -I../inst -I../inst/libvol2bird -I../inst/librave  -I../inst/libhlhdf  -I../inst/libtnc -I/usr/include/hdf5/serial -I/usr/lib/x86_64-linux-gnu/hdf5/serial -I/usr/include/python2.7
