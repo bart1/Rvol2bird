@@ -20,6 +20,7 @@ extern "C" {
 //'
 //' @param inn the input polar volume file as a string
 //' @param the output h5 file for the vp
+//' @param vol2BirdConfig a list with config options
 //' 
 //' @return A character with the vol to bird version
 //' 
@@ -31,10 +32,8 @@ extern "C" {
 //' plot(vp)
 //' 
 // [[Rcpp::export]]
-Rcpp::CharacterVector runVol2bird(const Rcpp::CharacterVector& inn, const Rcpp::CharacterVector& out,const Rcpp::List& options) {
+Rcpp::NumericVector runVol2bird(const Rcpp::CharacterVector& inn, const Rcpp::CharacterVector& out,const Rcpp::List& options) {
   
-  //int main(int argc, char** argv) {
-    //    cfg_t* cfg;
     vol2bird::vol2bird_t alldata;
     
     // number of input files specified on command line
@@ -63,11 +62,7 @@ Rcpp::CharacterVector runVol2bird(const Rcpp::CharacterVector& inn, const Rcpp::
       
       
       if(!vol2bird::isRegularFile(fileIn[i])){
-        std::cout <<"aaaasdfasdfas\n" ;
-        
         Rcpp::stop("Error: input file  does not exist.");
-        //return -1;
-        
       }
     }
     
@@ -94,7 +89,6 @@ Rcpp::CharacterVector runVol2bird(const Rcpp::CharacterVector& inn, const Rcpp::
     //   // return -1;
     // }
 
-    std::cout <<"aaaa\n";
     
     ///////////////////////
     //
@@ -167,12 +161,7 @@ Rcpp::CharacterVector runVol2bird(const Rcpp::CharacterVector& inn, const Rcpp::
     (&alldata)->options.useMistNet = Rcpp::as<bool>(options["USE_MISTNET"]);
    char abb[1000] ;
    strcpy(abb ,Rcpp::as<std::string>(options["MISTNET_PATH"]).append("\0").c_str());
-   std::cout << typeid(abb).name() << "\n";
-    strcpy((&alldata)->options.mistNetPath ,abb);
-    
-        
-//    (&alldata)->options. = Rcpp::as<bool>(options[""]);
-//    (&alldata)->options. = Rcpp::as<float>(options[""]);
+   strcpy((&alldata)->options.mistNetPath ,abb);
     
 Rcpp::NumericVector aa= Rcpp::as<Rcpp::NumericVector>(options["MISTNET_ELEVS"]);
 (&alldata)->options.mistNetNElevs = aa.size();
@@ -263,7 +252,6 @@ Rcpp::NumericVector aa= Rcpp::as<Rcpp::NumericVector>(options["MISTNET_ELEVS"]);
     // initialize volbird library
 
     int initSuccessful = vol2bird::vol2birdSetUp(volume, &alldata) == 0;
-    std::cout <<"asdfadsf3\n";
     
     if (initSuccessful == FALSE) {
       Rcpp::stop("Error: failed to initialize vol2bird");

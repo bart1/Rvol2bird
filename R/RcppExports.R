@@ -15,6 +15,7 @@ vol2birdVersion <- function() {
 #'
 #' @param inn the input polar volume file as a string
 #' @param the output h5 file for the vp
+#' @param vol2BirdConfig a list with config options
 #' 
 #' @return A character with the vol to bird version
 #' 

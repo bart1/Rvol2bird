@@ -10,6 +10,8 @@ runVol2bird(inn, out, options)
 \item{inn}{the input polar volume file as a string}
 
 \item{the}{output h5 file for the vp}
+
+\item{vol2BirdConfig}{a list with config options}
 }
 \value{
 A character with the vol to bird version

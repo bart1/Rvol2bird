@@ -21,7 +21,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <limits.h>
+#ifndef NOCONFUSE
 #include <confuse.h>
+#endif
 #include <stdlib.h>
 #include <math.h>
 #include <unistd.h>
@@ -2684,6 +2686,7 @@ int isRegularFile(const char *path) {
     return (access(path, F_OK) != -1);
 } /* end function is_regular_file */
 
+#ifndef NOCONFUSE
 
 static int readUserConfigOptions(cfg_t** cfg, const char * optsConfFilename) {
 
@@ -2759,7 +2762,9 @@ static int readUserConfigOptions(cfg_t** cfg, const char * optsConfFilename) {
     return 0;
 
 } // readUserConfigOptions
-    
+
+#endif
+
 
 
 
@@ -4570,6 +4575,8 @@ done:
 
 
 // loads configuration data in the alldata struct
+#ifndef NOCONFUSE
+
 int vol2birdLoadConfig(vol2bird_t* alldata) {
 
     alldata->misc.loadConfigSuccessful = FALSE;
@@ -4683,6 +4690,7 @@ int vol2birdLoadConfig(vol2bird_t* alldata) {
     return 0;
 
 }
+#endif
 
 
 //int vol2birdSetUp(PolarVolume_t* volume, cfg_t** cfg, vol2bird_t* alldata) {
@@ -5101,9 +5109,9 @@ void vol2birdTearDown(vol2bird_t* alldata) {
     RAVE_OBJECT_RELEASE(alldata->vp);
  
     // free the memory that holds the user configurable options
-    //XXX
-  //  cfg_free(alldata->cfg);
-    
+#ifndef NOCONFUSE
+      cfg_free(alldata->cfg);
+#endif    
     // reset this variable to its initial value
     alldata->misc.initializationSuccessful = FALSE;
     alldata->misc.loadConfigSuccessful = FALSE;

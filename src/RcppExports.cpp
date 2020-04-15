@@ -17,7 +17,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // runVol2bird
-Rcpp::CharacterVector runVol2bird(const Rcpp::CharacterVector& inn, const Rcpp::CharacterVector& out, const Rcpp::List& options);
+Rcpp::NumericVector runVol2bird(const Rcpp::CharacterVector& inn, const Rcpp::CharacterVector& out, const Rcpp::List& options);
 RcppExport SEXP _Rvol2bird_runVol2bird(SEXP innSEXP, SEXP outSEXP, SEXP optionsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
