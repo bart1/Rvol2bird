@@ -11,7 +11,9 @@
  *
  */
 
+#ifndef NOCONFUSE
 #include <confuse.h>
+#endif
 #include <polarvolume.h>
 #include <vertical_profile.h>
 
